@@ -11,6 +11,8 @@ import {
   Loader2,
 } from "lucide-react";
 
+import toast from "react-hot-toast";
+
 const SignUpPage = () => {
   const [showPassword, setShowPassword] = useState(false);
   const [formData, setFormData] = useState({
@@ -21,15 +23,33 @@ const SignUpPage = () => {
 
   const { signup, isSigningUp } = useAuthStore();
 
-  const validateForm = () => {};
+  const validateForm = () => {
+    if (!formData.fullName.trim()) {
+      return toast.error("Full name is required");
+    } else if (!formData.email.trim()) {
+      return toast.error("Email is required");
+    } else if (!/\S+@\S+\.\S+/.test(formData.email)) {
+      return toast.error("Invalid email format");
+    } else if (!formData.password) {
+      return toast.error("Password is required");
+    } else if (formData.password.length < 8) {
+      return toast.error("Password must be at least 8 characters");
+    } else {
+      return true;
+    }
+  };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+
+    const success = validateForm();
+    if (success === true) {
+      signup(formData);
+    }
   };
 
   return (
-    <div className="min-h-screen grid lg:grid-cols-2">
-      {/*left*/}
+    <div className="min-h-screen grid lg:grid-cols-1">
       <div className="flex flex-col justify-center items-center p-6 sm:p-12">
         <div className="w-full max-w-md space-y-8">
           <div className="text-center mb-8">
@@ -40,9 +60,6 @@ const SignUpPage = () => {
                 <MessageSquare className="size-6 text-primary" />
               </div>
               <h1 className="text-2xl font-bold mt-2">Create Account</h1>
-              <p className="text-base-content/60">
-                Get started with your free account
-              </p>
             </div>
           </div>{" "}
           {/*Logo ends*/}
@@ -143,8 +160,6 @@ const SignUpPage = () => {
           </div>
         </div>
       </div>
-
-      {/*RIGHT*/}
     </div>
   );
 };
