@@ -1,6 +1,7 @@
 import { useAuthStore } from "../store/useAuthStore";
-import { MessageSquare, User, Settings, LogOut } from "lucide-react";
+import { User, Settings, LogOut } from "lucide-react";
 import { Link } from "react-router-dom";
+import Logo from "./Logo";
 
 const NavigationBar = () => {
   const { logout, authUser } = useAuthStore();
@@ -16,9 +17,8 @@ const NavigationBar = () => {
               to="/"
               className="flex items-center gap-2.5 hover:opacity-80 transition-all"
             >
-              <div className="size-9 rounded-lg bg-primary/10 flex items-center justify-center">
-                <MessageSquare className="size-5 text-primary" />
-              </div>
+              <Logo size={3.5} />
+
               <h1 className="text-lg font-bold">Thischord</h1>
             </Link>
           </div>

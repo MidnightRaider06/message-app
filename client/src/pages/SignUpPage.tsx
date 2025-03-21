@@ -1,15 +1,8 @@
 import { useState } from "react";
 import { useAuthStore } from "../store/useAuthStore";
 import { Link } from "react-router-dom";
-import {
-  MessageSquare,
-  Mail,
-  Lock,
-  User,
-  Eye,
-  EyeOff,
-  Loader2,
-} from "lucide-react";
+import Logo from "../components/Logo";
+import { Mail, Lock, User, Eye, EyeOff, Loader2 } from "lucide-react";
 
 import toast from "react-hot-toast";
 
@@ -56,9 +49,7 @@ const SignUpPage = () => {
             {" "}
             {/*Logo starts*/}
             <div className="flex flex-col items-center gap=2 group">
-              <div className="size-12 rounded-xl bg-primary/10 flex items-center justify-center group-hover:bg-primary/20 transition-colors">
-                <MessageSquare className="size-6 text-primary" />
-              </div>
+              <Logo size={3} />
               <h1 className="text-2xl font-bold mt-2">Create Account</h1>
             </div>
           </div>{" "}
