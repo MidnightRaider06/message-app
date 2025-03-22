@@ -5,3 +5,11 @@ export function formatMessageTime(dateTime: string) {
         hour12: false,
     })
 }
+
+export function formatMessageDate(dateTime: string) {
+    return new Date(dateTime).toLocaleDateString("en-US", {
+        day: "2-digit",
+        month: "2-digit",
+        year: "numeric"
+    })
+}
